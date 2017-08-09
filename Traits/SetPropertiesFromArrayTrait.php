@@ -12,9 +12,9 @@ trait SetPropertiesFromArrayTrait
      * Fills attributes from array
      *
      * @param array $data
-     * @return $this
+     * @return SetPropertiesFromArrayTrait|$this
      */
-    public function fromArray(Array $data)
+    public function fromArray(Array $data): self
     {
         foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);
