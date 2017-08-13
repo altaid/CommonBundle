@@ -4,6 +4,8 @@ namespace Altaid\CommonBundle\Service;
 
 use Altaid\CommonBundle\Entity\EntityInterface;
 use Altaid\CommonBundle\Exception\ValidatorException;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -41,5 +43,35 @@ abstract class AbstractService
         }
 
         return $entity;
+    }
+
+    /**
+     * Paginates a query
+     *
+     * @param Query $query
+     * @param int $page
+     * @param int $limit
+     * @param bool $fetchJoinCollection
+     * @return array
+     */
+    public function paginate(Query $query, int $page = 1, int $limit = 10, $fetchJoinCollection = true): array
+    {
+        $paginator = new Paginator($query, $fetchJoinCollection);
+        $totalItems = $paginator->count();
+        $pagesCount = ceil($totalItems / $limit);
+        $paginator
+            ->getQuery()
+            ->setFirstResult($limit * ($page - 1))// offset
+            ->setMaxResults($limit); // limit
+
+        return [
+            'meta' => [
+                'page' => $page,
+                'total' => $totalItems,
+                'pages' => $pagesCount,
+                'limit' => $limit,
+            ],
+            'data' => iterator_to_array($paginator)
+        ];
     }
 }

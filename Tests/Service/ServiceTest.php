@@ -3,7 +3,9 @@
 namespace Altaid\CommonBundle\Tests\Service;
 
 use Altaid\CommonBundle\Tests\Entity\Entity;
+use Doctrine\ORM\Query;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class ServiceTest
@@ -17,13 +19,18 @@ class ServiceTest extends WebTestCase
     private $service;
 
     /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
      * @inheritdoc
      */
     public function setUp()
     {
         parent::setUp();
-        $container = self::bootKernel()->getContainer();
-        $this->service = new Service($container->get('validator'));
+        $this->container = self::bootKernel()->getContainer();
+        $this->service = new Service($this->container->get('validator'));
     }
 
     public function testConstruct()
