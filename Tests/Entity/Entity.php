@@ -4,6 +4,7 @@ namespace Altaid\CommonBundle\Tests\Entity;
 
 use Altaid\CommonBundle\Entity\AbstractEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Entity
@@ -15,6 +16,7 @@ class Entity extends AbstractEntity
 {
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $name;
 
