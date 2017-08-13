@@ -9,8 +9,4 @@ use Altaid\CommonBundle\Repository\AbstractRepository;
  */
 class Repository extends AbstractRepository
 {
-    public function getTest()
-    {
-
-    }
 }

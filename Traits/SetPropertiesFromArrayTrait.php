@@ -14,7 +14,7 @@ trait SetPropertiesFromArrayTrait
      * @param array $data
      * @return SetPropertiesFromArrayTrait|$this
      */
-    public function fromArray(Array $data): self
+    public function fromArray(array $data): self
     {
         foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);

@@ -14,5 +14,5 @@ interface EntityInterface
      * @param array $data
      * @return SetPropertiesFromArrayTrait|$this
      */
-    public function fromArray(array $data): self;
+    public function fromArray(array $data);
 }

@@ -2,7 +2,6 @@
 
 namespace Altaid\CommonBundle\Tests\Repository;
 
-use Altaid\CommonBundle\Repository\AbstractRepository;
 use Doctrine\ORM\Query;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
