@@ -2,7 +2,10 @@
 
 namespace Altaid\CommonBundle\Tests\Service;
 
+use Altaid\CommonBundle\Repository\AbstractRepository;
+use Altaid\CommonBundle\Service\AbstractService;
 use Altaid\CommonBundle\Tests\Entity\Entity;
+use Altaid\CommonBundle\Tests\Repository\Repository;
 use Doctrine\ORM\Query;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -55,5 +58,14 @@ class ServiceTest extends WebTestCase
     {
         $entity = new Entity(['name' => 'noname']);
         self::assertInstanceOf(Entity::class, $this->service->validate($entity));
+    }
+
+    /**
+     * @covers \Altaid\CommonBundle\Service\AbstractService::setRepository()
+     */
+    public function testSetRepository()
+    {
+        $repository = $this->getMockBuilder(Repository::class)->disableOriginalConstructor()->getMock();
+        self::assertInstanceOf(Service::class, $this->service->setRepository($repository));
     }
 }

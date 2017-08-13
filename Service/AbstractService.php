@@ -4,6 +4,7 @@ namespace Altaid\CommonBundle\Service;
 
 use Altaid\CommonBundle\Entity\EntityInterface;
 use Altaid\CommonBundle\Exception\ValidatorException;
+use Altaid\CommonBundle\Repository\AbstractRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -13,7 +14,15 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 abstract class AbstractService
 {
+    /**
+     * @var null|ValidatorInterface
+     */
     protected $validator;
+
+    /**
+     * @var AbstractRepository
+     */
+    protected $repository;
 
     /**
      * AbstractService constructor.
@@ -48,6 +57,7 @@ abstract class AbstractService
     /**
      * Paginates a query
      *
+     * @codeCoverageIgnore
      * @param Query $query
      * @param int $page
      * @param int $limit
@@ -73,5 +83,18 @@ abstract class AbstractService
             ],
             'data' => iterator_to_array($paginator)
         ];
+    }
+
+    /**
+     * Sets repository
+     *
+     * @param AbstractRepository $repository
+     * @return AbstractService|$this
+     */
+    public function setRepository(AbstractRepository $repository): self
+    {
+        $this->repository = $repository;
+
+        return $this;
     }
 }
