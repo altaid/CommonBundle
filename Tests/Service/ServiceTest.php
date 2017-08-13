@@ -30,7 +30,7 @@ class ServiceTest extends WebTestCase
     {
         self::assertInstanceOf(Service::class, new Service());
     }
-    
+
     /**
      * @covers \Altaid\CommonBundle\Service\AbstractService::validate()
      * @expectedException \Altaid\CommonBundle\Exception\ValidatorException
