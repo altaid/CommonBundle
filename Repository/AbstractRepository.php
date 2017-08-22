@@ -2,6 +2,7 @@
 
 namespace Altaid\CommonBundle\Repository;
 
+use Altaid\CommonBundle\Entity\EntityInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -75,5 +76,38 @@ abstract class AbstractRepository extends EntityRepository
         $this->lifetime = $lifetime;
 
         return $this;
+    }
+
+    /**
+     * Persists an entity
+     *
+     * @codeCoverageIgnore
+     * @param EntityInterface $entity
+     */
+    public function persist(EntityInterface $entity): void
+    {
+        $this->getEntityManager()->persist($entity);
+    }
+
+    /**
+     * Removes an entity
+     *
+     * @codeCoverageIgnore
+     * @param EntityInterface $entity
+     */
+    public function remove(EntityInterface $entity): void
+    {
+        $this->getEntityManager()->remove($entity);
+    }
+
+    /**
+     * Flushes
+     *
+     * @codeCoverageIgnore
+     * @param EntityInterface|null $entity
+     */
+    public function flush(EntityInterface $entity = null): void
+    {
+        $this->getEntityManager()->flush();
     }
 }
