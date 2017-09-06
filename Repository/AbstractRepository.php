@@ -90,6 +90,17 @@ abstract class AbstractRepository extends EntityRepository
     }
 
     /**
+     * Merges an entity
+     *
+     * @codeCoverageIgnore
+     * @param EntityInterface $entity
+     */
+    public function merge(EntityInterface $entity)
+    {
+        $this->getEntityManager()->merge($entity);
+    }
+
+    /**
      * Removes an entity
      *
      * @codeCoverageIgnore
